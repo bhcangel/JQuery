@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="js/jquery-3.5.1.js"></script>
+</head>
+<body>
+    
+    <ul id="test">
+        <li>태그1</li>
+        <li>태그2</li>
+        <li>태그3</li>
+    </ul>
+
+    <script>
+        //li에 이벤트 거는방법
+
+        // 1st
+        //li태그에 인라인 방식으로 동일함수를 실행시키는 방법
+
+        // 2nd
+        // var test = document.getElementById("test");
+        // var list = test.querySelectorAll("li");
+        // console.log(list);
+
+        // for(var i = 0; i < list.length; i++){
+        //     list[i].onclick = function() {
+        //         console.log("이벤트");
+        //     }
+        // }
+
+
+        // 3rd - 이벤트 전파
+        // ul에 이벤트를 걸고
+        // var test = document.getElementById("test");
+        // test.onclick = function() {
+        //     if(event.tagName == "UL"){
+        //         return;
+        //     }
+        //     alert("이벤트");
+        // }
+
+
+        // 4th - 제이쿼리
+        $("#test").on("click", "li", function() {
+            alert("이벤트1234");
+        })
+
+    </script>
+
+
+    <div id="box">
+        <a href='#'>태그1</a><br>
+        <a href='#'>태그2</a><br>
+        <a href='#'>태그3</a><br>
+    </div>
+
+
+
+
+    <script>
+
+        // 제이쿼리 일반 이벤트
+        // 위에서 태그가 미리 만들어져 잇으면 이렇게만 써도 됨
+        // 밑에서 태그 4 5 6으로 바꿧기 때문에 다시 이벤트 전파방식 씀
+        $("#box a[href='#']").click(function () {
+            alert("이벤트가 걸리나??");
+        })
+
+        //제이쿼리 이벤트전파
+        //on은 자식에게 이벤트 전파를 함
+        //첫번째는 어떤 이벤트인지
+        //두번째는 어떤 속성에 걸 건지
+        $("#box").on("click", "a[href='#']",function() {
+            alert("이벤트가 걸리나?????????");
+        })
+
+        var str = "";
+        str += "<a href='#'>태그4</a><br>";
+        str += "<a href='#'>태그5</a><br>";
+        str += "<a href='#'>태그6</a><br>";
+
+        $("#box").html(str);
+    </script>
+
+</body>
+</html>
